@@ -1,0 +1,26 @@
+digraph HealthCare {
+  graph [rankdir=LR, fontname="Helvetica", labelloc=t, label="Project 3: Health Care System - Database Diagram", fontsize=20, pad=0.4, nodesep=0.6, ranksep=1.2];
+  node [shape=plain, fontname="Helvetica"];
+  edge [fontname="Helvetica", fontsize=11, arrowhead=crow, arrowtail=tee, dir=both, color="#444444"];
+
+  Patient [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Patients</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Name (nvarchar)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">DateOfBirth (datetime)</TD></TR></TABLE>>];
+
+  Doctor [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Doctors</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Name (nvarchar)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Specialization (nvarchar)</TD></TR></TABLE>>];
+
+  Appointment [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#c05621" COLSPAN="2"><FONT COLOR="white"><B>Appointments (join)</B></FONT></TD></TR>
+    <TR><TD PORT="pid">PK, FK</TD><TD ALIGN="LEFT">PatientId (int)</TD></TR>
+    <TR><TD PORT="did">PK, FK</TD><TD ALIGN="LEFT">DoctorId (int)</TD></TR>
+    <TR><TD>PK</TD><TD ALIGN="LEFT">AppointmentDate (datetime)</TD></TR></TABLE>>];
+
+  Patient:id -> Appointment:pid [label="1 : N"];
+  Doctor:id -> Appointment:did [label="1 : N"];
+}

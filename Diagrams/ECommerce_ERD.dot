@@ -1,0 +1,40 @@
+digraph ECommerce {
+  graph [rankdir=LR, fontname="Helvetica", labelloc=t, label="Project 1: E-commerce System - Database Diagram", fontsize=20, pad=0.4, nodesep=0.6, ranksep=1.2];
+  node [shape=plain, fontname="Helvetica"];
+  edge [fontname="Helvetica", fontsize=11, arrowhead=crow, arrowtail=tee, dir=both, color="#444444"];
+
+  Category [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Categories</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Name (nvarchar)</TD></TR></TABLE>>];
+
+  Product [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Products</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Name (nvarchar)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Price (decimal 18,2)</TD></TR>
+    <TR><TD PORT="cat">FK</TD><TD ALIGN="LEFT">CategoryId (int)</TD></TR></TABLE>>];
+
+  Customer [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Customers</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Name (nvarchar)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Email (nvarchar)</TD></TR></TABLE>>];
+
+  Order [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Orders</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">OrderDate (datetime)</TD></TR>
+    <TR><TD PORT="cust">FK</TD><TD ALIGN="LEFT">CustomerId (int)</TD></TR></TABLE>>];
+
+  OrderDetail [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#c05621" COLSPAN="2"><FONT COLOR="white"><B>OrderDetails (join)</B></FONT></TD></TR>
+    <TR><TD PORT="oid">PK, FK</TD><TD ALIGN="LEFT">OrderId (int)</TD></TR>
+    <TR><TD PORT="pid">PK, FK</TD><TD ALIGN="LEFT">ProductId (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Quantity (int)</TD></TR></TABLE>>];
+
+  Category:id -> Product:cat [label="1 : N"];
+  Customer:id -> Order:cust [label="1 : N"];
+  Order:id -> OrderDetail:oid [label="1 : N"];
+  Product:id -> OrderDetail:pid [label="1 : N"];
+}

@@ -1,0 +1,35 @@
+digraph Library {
+  graph [rankdir=LR, fontname="Helvetica", labelloc=t, label="Project 2: Library System - Database Diagram", fontsize=20, pad=0.4, nodesep=0.6, ranksep=1.2];
+  node [shape=plain, fontname="Helvetica"];
+  edge [fontname="Helvetica", fontsize=11, arrowhead=crow, arrowtail=tee, dir=both, color="#444444"];
+
+  Author [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Authors</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Name (nvarchar)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">BirthDate (datetime)</TD></TR></TABLE>>];
+
+  Book [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Books</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Title (nvarchar)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">ISBN (nvarchar, unique)</TD></TR>
+    <TR><TD PORT="aid">FK</TD><TD ALIGN="LEFT">AuthorId (int)</TD></TR></TABLE>>];
+
+  Borrower [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#2b6cb0" COLSPAN="2"><FONT COLOR="white"><B>Borrowers</B></FONT></TD></TR>
+    <TR><TD PORT="id">PK</TD><TD ALIGN="LEFT">Id (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Name (nvarchar)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">MembershipDate (datetime)</TD></TR></TABLE>>];
+
+  Loan [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR><TD BGCOLOR="#c05621" COLSPAN="2"><FONT COLOR="white"><B>Loans (join)</B></FONT></TD></TR>
+    <TR><TD PORT="bid">PK, FK</TD><TD ALIGN="LEFT">BookId (int)</TD></TR>
+    <TR><TD PORT="brid">PK, FK</TD><TD ALIGN="LEFT">BorrowerId (int)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">LoanDate (datetime)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">ReturnDate (datetime, null)</TD></TR></TABLE>>];
+
+  Author:id -> Book:aid [label="1 : N"];
+  Book:id -> Loan:bid [label="1 : N"];
+  Borrower:id -> Loan:brid [label="1 : N"];
+}
